@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Stop Watch</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="action.js" defer></script>
+</head>
+<body>
+    
+    <h1 class="head-main">Stop Watch</h1>
+    <div class="Container">
+        <div class="Stopwatch-section">
+            <div class="Time">
+                <div class="time-slot">
+                    <span class="Hours">00</span>
+                    <span class="Hours-Label">HH</span>
+                </div>
+                :
+                <div class="time-slot">
+                    <span class="Minutes">00</span>
+                    <span class="Minutes-Label">MM</span>
+                </div>
+                :
+                <div class="time-slot">
+                    <span class="Seconds">00</span>
+                    <span class="Seconds-Label">SS</span>
+                </div>
+                :
+                <div class="time-slot">
+                    <span class="Milliseconds">00</span>
+                    <span class="Milliseconds-Label">mm</span>
+                </div>
+            </div>
+            <div class="Buttons">
+                <button role="button" class="button-30 Start">Start</button>
+                <button role="button" class="button-30 Lap">Lap</button>
+                <button role="button" class="button-30 Reset" disabled>Reset</button>
+            </div>
+            
+
+            
+    </div>
+    <div class="Laps-section">
+        <ul class="lap-list">
+            <li class="lap-item">
+                    <div class="time-slot">
+                        <span class="Hours">00</span>
+                        <span class="Hours-Label">HH</span>
+                    </div>
+                    :
+                    <div class="time-slot">
+                        <span class="Minutes">00</span>
+                        <span class="Minutes-Label">MM</span>
+                    </div>
+                    :
+                    <div class="time-slot">
+                        <span class="Seconds">00</span>
+                        <span class="Seconds-Label">SS</span>
+                    </div>
+                    :
+                    <div class="time-slot">
+                        <span class="Milliseconds">00</span>
+                        <span class="Milliseconds-Label">mm</span>
+                    </div>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
