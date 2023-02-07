@@ -2,17 +2,29 @@ body{
     margin: 0;
     padding: 0;
     font-family: "JetBrains Mono",monospace;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
-
+.Container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+}
+.head-main{
+    color: #36395A;
+    text-align: center;
+    font-size: 1rem;
+}
 .Stopwatch-section{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #FCFCFD;
-    width: 50%;
-    height: 60vh;
-    width: 40vw;
+    width: 70%;
     border-radius: 10px;
     box-shadow: 0 0 5px;
 }
@@ -21,19 +33,16 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     color: #FCFCFD;
-    height: 60vh;
-    width: 40vw;
+    height: 80vh;
+    padding: 10px;
+    position: relative;
 }
-
-.Container{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.head-main{
-    color: white;
+.Clear{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 .Time{
     margin: 20px;
@@ -60,27 +69,45 @@ body{
     border-radius: 10px;
     box-shadow: 0 0 5px grey;
 }
+.Laps-section p{
+    padding: 0;
+    margin: 10px 0;
+    color: #36395A;
+}
+.Laps-section-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 90%;
+}
 .lap-list{
+    padding: 0;
+    margin: 0;
     list-style: none;
     display: flex;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
+    overflow-y: scroll;
+}
+.lap-list::-webkit-scrollbar{
+    width: 5px;
 }
 .lap-item{
+    font-size: 2rem;
     background: white;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 0 5px #871aac;
     display: flex;
+    margin: 10px;
 }
 .lap-label{
     color: #36395A;
     margin: 10px 0;
 }
 
-.lap-item .time-slot{
-    padding: 20px;
-}
 /* CSS */
 .button-30[disabled=true]{
     opacity: 0.5;

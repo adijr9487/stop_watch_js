@@ -1,18 +1,21 @@
 const START_BUTTON = document.querySelector('.Start');
 const LAP_BUTTON = document.querySelector('.Lap');
 const RESET_BUTTON = document.querySelector('.Reset');
+const CLEAR_BUTTON = document.querySelector('.Clear');
 
 const HOURS_DISPLAY = document.querySelector('.Hours');
 const MINUTES_DISPLAY = document.querySelector('.Minutes');
 const SECONDS_DISPLAY = document.querySelector('.Seconds');
 const MILLISECONDS_DISPLAY = document.querySelector('.Milliseconds');
 
+const LAP_LIST = document.querySelector('.lap-list')
+
 class Timer{
     constructor(){
-        this.hours = 0;
-        this.minutes = 0;
-        this.seconds = 0;
-        this.milliseconds = 0;
+        this.hours = '00';
+        this.minutes = '00';
+        this.seconds = '00';
+        this.milliseconds = '00';
 
         this.hours_interval = null;
         this.minutes_interval = null;
@@ -23,45 +26,53 @@ class Timer{
         this.laps = [];
     }
 
+    normalize_text(value){
+        if(value < 10){
+            return '0' + Number(value);
+        }else{
+            return value;
+        }
+    }
+
     start(){
 
         this.hours_interval = setInterval(() => {
             if(this.hours == 23){
-                this.hours = 0;
+                this.hours = '00';
             }else{
                 this.hours++;
             }
-            HOURS_DISPLAY.innerHTML = this.hours;
+            HOURS_DISPLAY.innerHTML = this.normalize_text(this.hours);
         }
         , 60*60*1000);
 
         this.minutes_interval = setInterval(() => {
             if(this.minutes == 59){
-                this.minutes = 0;
+                this.minutes = '00';
             }else{
                 this.minutes++;
             }
-            MINUTES_DISPLAY.innerHTML = this.minutes;
+            MINUTES_DISPLAY.innerHTML = this.normalize_text(this.minutes);
         }
         , 60*1000);
 
         this.seconds_interval = setInterval(() => {
             if(this.seconds == 59){
-                this.seconds = 0;
+                this.seconds = '00';
             }else{
                 this.seconds++;
             }
-            SECONDS_DISPLAY.innerHTML = this.seconds;
+            SECONDS_DISPLAY.innerHTML = this.normalize_text(this.seconds);
         }
         , 1000);
 
         this.milliseconds_interval = setInterval(() => {
             if(this.milliseconds == 99){
-                this.milliseconds = 0;
+                this.milliseconds = '00';
             }else{
                 this.milliseconds++;
             }
-            MILLISECONDS_DISPLAY.innerHTML = this.milliseconds;
+            MILLISECONDS_DISPLAY.innerHTML = this.normalize_text(this.milliseconds);
         }
         , 10);
 
@@ -79,10 +90,10 @@ class Timer{
 
     reset(){
             
-        this.hours = 0;
-        this.minutes = 0;
-        this.seconds = 0;
-        this.milliseconds = 0;
+        this.hours = '00';
+        this.minutes = '00';
+        this.seconds = '00';
+        this.milliseconds = '00';
 
         this.update_display();
     
@@ -99,16 +110,59 @@ class Timer{
     }
 
     lap(){
-        this.laps.push({
-            hours: this.hours,
-            minutes: this.minutes,
-            seconds: this.seconds,
-            milliseconds: this.milliseconds
-        });
+        let lap = {
+            hours: this.normalize_text(this.hours),
+            minutes: this.normalize_text(this.minutes),
+            seconds: this.normalize_text(this.seconds),
+            milliseconds: this.normalize_text(this.milliseconds)
+        }
+
+        LAP_LIST.appendChild(this.get_lap_dom(lap));
+    }
+    
+    get_lap_dom(lap){
+        let node = document.createElement('li');
+        node.classList.add('lap-item');
+        node.innerHTML = 
+        `<div class='time-slot'>
+        <span class='Hours'>${lap.hours}</span>
+        </div>
+        :
+        <div class='time-slot'>
+            <span class='Minutes'>${lap.minutes}</span>
+        </div>
+        :
+        <div class='time-slot'>
+            <span class='Seconds'>${lap.seconds}</span>
+        </div>
+        :
+        <div class='time-slot'>
+            <span class='Milliseconds'>${lap.milliseconds}</span>
+        </div>`
+
+        return node
     }
 
     clearLap(){
-        this.laps = [];
+        LAP_LIST.innerHTML = `
+        <li class="lap-item">
+                    <div class='time-slot'>
+                        <span class='Hours'>HH</span>
+                    </div>
+                    :
+                    <div class='time-slot'>
+                        <span class='Minutes'>MM</span>
+                    </div>
+                    :
+                    <div class='time-slot'>
+                        <span class='Seconds'>SS</span>
+                    </div>
+                    :
+                    <div class='time-slot'>
+                        <span class='Milliseconds'>mm</span>
+                    </div>
+                </li>
+                `;
     }
 }
 
@@ -129,8 +183,13 @@ START_BUTTON.addEventListener('click', () => {
 
 RESET_BUTTON.addEventListener('click', () => {
     TIMER.reset();
+    START_BUTTON.innerText = 'Start';
 });
 
 LAP_BUTTON.addEventListener('click', () => {
     TIMER.lap();
 });
+
+CLEAR_BUTTON.addEventListener('click', () => {
+    TIMER.clearLap();
+})
