@@ -36,45 +36,32 @@ class Timer{
 
     start(){
 
-        this.hours_interval = setInterval(() => {
-            if(this.hours == 23){
-                this.hours = '00';
-            }else{
-                this.hours++;
-            }
-            HOURS_DISPLAY.innerHTML = this.normalize_text(this.hours);
-        }
-        , 60*60*1000);
-
-        this.minutes_interval = setInterval(() => {
-            if(this.minutes == 59){
-                this.minutes = '00';
-            }else{
-                this.minutes++;
-            }
-            MINUTES_DISPLAY.innerHTML = this.normalize_text(this.minutes);
-        }
-        , 60*1000);
-
-        this.seconds_interval = setInterval(() => {
-            if(this.seconds == 59){
-                this.seconds = '00';
-            }else{
-                this.seconds++;
-            }
-            SECONDS_DISPLAY.innerHTML = this.normalize_text(this.seconds);
-        }
-        , 1000);
-
         this.milliseconds_interval = setInterval(() => {
+            
             if(this.milliseconds == 99){
                 this.milliseconds = '00';
+                this.seconds++;
             }else{
                 this.milliseconds++;
             }
-            MILLISECONDS_DISPLAY.innerHTML = this.normalize_text(this.milliseconds);
+
+            if(this.seconds == 60){
+                this.seconds = '00';
+                this.minutes++;
+            }
+
+            if(this.minutes == 60){
+                this.minutes = '00';
+                this.hours++;
+            }
+
         }
-        , 10);
+        , 10);   
+
+        // interval update 
+        setInterval(() => {
+            this.update_display();
+        }, 10);
 
     }
 
@@ -105,7 +92,6 @@ class Timer{
         MINUTES_DISPLAY.innerHTML = this.minutes;
         SECONDS_DISPLAY.innerHTML = this.seconds;
         MILLISECONDS_DISPLAY.innerHTML = this.milliseconds;
-
 
     }
 

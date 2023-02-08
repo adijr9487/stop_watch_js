@@ -48,12 +48,13 @@ body{
     margin: 20px;
     font-size: 3rem;
     display: flex;
+    align-items: center;
+    color: #36395A;
 }
 .time-slot{
     display: flex;
     flex-direction: column;
     background-color: white;
-    color: #36395A;
     padding: 10px;
     align-items: center;
     appearance: none;
